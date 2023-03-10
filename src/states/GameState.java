@@ -3,11 +3,13 @@ package states;
 import gameObjects.*;
 import graficos.Animacion;
 import graficos.Assets;
-import graficos.Text;
 import math.Vector2D;
 
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameState {
@@ -29,7 +31,7 @@ public class GameState {
 
     public void addpuntuacion (int value, Vector2D posicion){
         puntuacion += value;
-        mensajes.add(new Mensaje(posicion,true, "+"+value+" puntos",Color.WHITE,false,Assets.fuentelil,this));
+        mensajes.add(new Mensaje(posicion,true, "+"+value+" puntos",Color.WHITE,false,Assets.fuentepeque,this));
     }
 
     public void dividirAsteroide(Asteroide asteroide){
@@ -56,10 +58,14 @@ public class GameState {
         }
     }
 
-    private void iniciarOleada(){
+    private void dibujarOleada(){
 
-        mensajes.add(new Mensaje(new Vector2D(Constantes.WIDTH/2,Constantes.HEIGHT/2),true,"OLEADA "+waves,
-                Color.WHITE,true,Assets.fuente,this));
+
+        mensajes.add(new Mensaje(new Vector2D(Constantes.WIDTH/2,Constantes.HEIGHT/2),true,"Oleada "+waves,
+                Color.WHITE,true, Assets.fuente,this));
+    }
+
+    private void iniciarOleada(){
 
         double x,y;
         for(int i = 0; i < asteroides;i++){
@@ -79,6 +85,7 @@ public class GameState {
         }
         asteroides++;
         spawnUfo();
+        dibujarOleada();
         waves++;
     }
 
