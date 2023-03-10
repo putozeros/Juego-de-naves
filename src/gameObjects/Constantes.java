@@ -23,7 +23,7 @@ public class Constantes {
     // Propiedades del Alien
     public static final int NODE_RADIO = 160;
     public static final int UFO_MAX_SPEED = 3;
-    public static long UFO_FIRERATE = 500;
+    public static long UFO_FIRERATE = 400;
     public static double UFO_ANGLE_RANGE = Math.PI/2;
     public static final int UFO_SCORE = 20;
 }

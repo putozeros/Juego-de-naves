@@ -1,5 +1,7 @@
 package graficos;
 
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -36,10 +38,8 @@ public class Assets {
     public static BufferedImage[] enanos = new BufferedImage[2];
     //fuentes
     public static Font fuente;
-    public static Font fuentelil;
+    public static Font fuentepeque;
 
-    //sonidos
-    public static Clip explosion, perder, disparoJugador, disparoAlien;
     public static void init(){
         jugador = Loader.imageLoader("res/ships/player.png");
         velocidad = Loader.imageLoader("res/effects/fire08.png");
@@ -48,8 +48,8 @@ public class Assets {
         lrojo = Loader.imageLoader("res/lasers/laserRed01.png");
         ufo = Loader.imageLoader("res/ships/ufo.png");
         vidas = Loader.imageLoader("res/otros/vidas.png");
-        fuente = Loader.loadFont("res/Fuentes/Kenney Future.ttf",42);
-        fuentelil = Loader.loadFont("res/Fuentes/Kenney Future.ttf",22);
+        fuente = new Font("res/Fuentes/Kenney Future.ttf",Font.PLAIN,42);
+        fuentepeque = new Font("res/Fuentes/Kenney Future.ttf",Font.PLAIN,22);
         for(int i = 0;i<grandes.length;i++){
             grandes[i] = Loader.imageLoader("res/asteroides/meteorGrey_big3.png");
         }
@@ -68,7 +68,5 @@ public class Assets {
         for(int i = 0;i < num.length; i++) {
             num[i] = Loader.imageLoader("res/numeros/"+ i +".png");
         }
-
-
     }
 }

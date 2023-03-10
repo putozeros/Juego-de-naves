@@ -3,13 +3,11 @@ package states;
 import gameObjects.*;
 import graficos.Animacion;
 import graficos.Assets;
+import graficos.Sonido;
 import math.Vector2D;
 
-import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameState {
@@ -20,11 +18,13 @@ public class GameState {
     private ArrayList<Mensaje> mensajes = new ArrayList<Mensaje>();
     private int puntuacion = 0,vidas = 3;
     private int asteroides;
+    private Font fuentecilla;
     private int waves = 1;
     public GameState(){
         player=new Player(new Vector2D(640,360), new Vector2D(),6 , Assets.jugador,this);
         movingObjects.add(player);
-
+        Sonido sonido = new Sonido("res/Sonidos/musica.wav");
+        sonido.loop();
         asteroides = 1;
         iniciarOleada();
     }
@@ -33,6 +33,8 @@ public class GameState {
         puntuacion += value;
         mensajes.add(new Mensaje(posicion,true, "+"+value+" puntos",Color.WHITE,false,Assets.fuentepeque,this));
     }
+
+
 
     public void dividirAsteroide(Asteroide asteroide){
         Size size = asteroide.getSize();
@@ -58,8 +60,7 @@ public class GameState {
         }
     }
 
-    private void dibujarOleada(){
-
+   private void dibujarOleada(){
 
         mensajes.add(new Mensaje(new Vector2D(Constantes.WIDTH/2,Constantes.HEIGHT/2),true,"Oleada "+waves,
                 Color.WHITE,true, Assets.fuente,this));

@@ -1,6 +1,7 @@
 package gameObjects;
 
 import graficos.Assets;
+import graficos.Sonido;
 import math.Vector2D;
 import states.GameState;
 
@@ -93,7 +94,8 @@ public class Ufo extends MovingObject{
             );
 
             gameState.getMovingObjects().add(0,laser);
-
+            Sonido sonido = new Sonido("res/Sonidos/sfx_laser1.wav");
+            sonido.play();
             fireRate.run(Constantes.UFO_FIRERATE);
         }
 

@@ -1,6 +1,7 @@
 package gameObjects;
 
 import graficos.Assets;
+import graficos.Sonido;
 import input.Keyboard;
 import math.Vector2D;
 import states.GameState;
@@ -45,6 +46,8 @@ public class Player extends MovingObject{
             gameState.getMovingObjects().add(new Laser(getCenter().add(heading.escalar(ancho-30)), heading,
                     Constantes.LASER_SPEED, angle, Assets.lazul, gameState));
             fireRate.run(Constantes.FIRERATE);
+            Sonido sonido = new Sonido("res/Sonidos/sfx_laser2.wav");
+            sonido.play();
         }
         if(Keyboard.DERECHA){
             angle += Constantes.DELTAANGLE;
@@ -91,6 +94,8 @@ public class Player extends MovingObject{
 
     @Override
     public void Destruir(){
+        Sonido sonido = new Sonido("res/Sonidos/sfx_lose.wav");
+        sonido.play();
         spawning = true;
         spawntime.run(Constantes.Spawning);
         resetValues();
