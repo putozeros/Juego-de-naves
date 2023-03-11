@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class GameState {
+public class GameState extends State{
 
     private Player player;
     private ArrayList<MovingObject> movingObjects = new ArrayList<MovingObject>();
@@ -23,8 +23,8 @@ public class GameState {
     public GameState(){
         player=new Player(new Vector2D(640,360), new Vector2D(),6 , Assets.jugador,this);
         movingObjects.add(player);
-        Sonido sonido = new Sonido("res/Sonidos/musica.wav");
-        sonido.loop();
+        Sonido musica= new Sonido("res/Sonidos/musica.wav");
+        musica.loop();
         asteroides = 1;
         iniciarOleada();
     }

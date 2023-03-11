@@ -5,6 +5,7 @@ import java.io.File;
 public class Sonido {
     private Clip clip;
     private String filePath;
+    private FloatControl volumen;
 
     public Sonido(String filePath){
         this.filePath = filePath;
@@ -16,6 +17,7 @@ public class Sonido {
         } catch (Exception e){
             System.err.println(e.getMessage());
         }
+        volumen = (FloatControl)clip.getControl(FloatControl.Type.MASTER_GAIN);
     }
 
     public void play(){
@@ -37,5 +39,9 @@ public class Sonido {
             clip.setFramePosition(0);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
+    }
+
+    public void cambiarVolumen (float value){
+        volumen.setValue(value);
     }
 }

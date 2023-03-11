@@ -3,7 +3,10 @@ package main;
 import gameObjects.Constantes;
 import graficos.Assets;
 import input.Keyboard;
+import input.MouseInput;
+import states.EstadoMenu;
 import states.GameState;
+import states.State;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +23,8 @@ public class ventana extends JFrame implements Runnable {
     private double targettime = 1000000000/frames;
     private double delta = 0;
     private int AVGFPS = frames;
-    private GameState gameState;
     private Keyboard keyboard;
+    private MouseInput mouseInput;
 
     public ventana(){
         setTitle("Naves");
@@ -34,6 +37,7 @@ public class ventana extends JFrame implements Runnable {
 
         canvas = new Canvas();
         keyboard = new Keyboard();
+        mouseInput = new MouseInput();
 
         canvas.setPreferredSize(new Dimension(Constantes.WIDTH, Constantes.HEIGHT));
         canvas.setMaximumSize(new Dimension(Constantes.WIDTH, Constantes.HEIGHT));
@@ -42,6 +46,8 @@ public class ventana extends JFrame implements Runnable {
 
         add(canvas);
         canvas.addKeyListener(keyboard);
+        canvas.addMouseListener(mouseInput);
+        canvas.addMouseMotionListener(mouseInput);
         setVisible(true);
     }
 
@@ -51,7 +57,7 @@ public class ventana extends JFrame implements Runnable {
 
     private void actualizar(){
         keyboard.actualizar();
-        gameState.updatear();
+        State.getEstadoActual().updatear();
     }
 
     private void dibujar(){
@@ -66,11 +72,11 @@ public class ventana extends JFrame implements Runnable {
         graphics.setColor(Color.black);
         graphics.fillRect(0,0,Constantes.WIDTH, Constantes.HEIGHT);
 
-        gameState.dibujar(graphics);
+        State.getEstadoActual().dibujar(graphics);
 
-        graphics.setColor(Color.WHITE);
+        /*graphics.setColor(Color.WHITE);
 
-        graphics.drawString(""+AVGFPS,5,15);
+        graphics.drawString(""+AVGFPS,5,15);*/
 
         //----------------------------------
         graphics.dispose();
@@ -79,7 +85,7 @@ public class ventana extends JFrame implements Runnable {
 
     private void init(){
         Assets.init();
-        gameState = new GameState();
+        State.cambiarEstado(new EstadoMenu());
     }
 
     @Override

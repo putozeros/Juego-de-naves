@@ -26,4 +26,8 @@ public class Constantes {
     public static long UFO_FIRERATE = 400;
     public static double UFO_ANGLE_RANGE = Math.PI/2;
     public static final int UFO_SCORE = 20;
+
+    // Propiedades de menú
+    public static final String PLAY = "JUGAR";
+    public static final String EXIT = "SALIR";
 }

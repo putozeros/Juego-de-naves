@@ -107,6 +107,8 @@ public class Ufo extends MovingObject{
     @Override
     public void Destruir(){
         gameState.addpuntuacion(Constantes.UFO_SCORE, posicion);
+        Sonido sonido = new Sonido("res/Sonidos/explosion.wav");
+        sonido.play();
         super.Destruir();
     }
 

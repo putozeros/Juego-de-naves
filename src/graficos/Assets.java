@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Assets {
+    //botones
+    public static BufferedImage botonGris;
+    public static BufferedImage botonRojo;
 
     //jugador
     public static BufferedImage jugador;
@@ -48,8 +51,10 @@ public class Assets {
         lrojo = Loader.imageLoader("res/lasers/laserRed01.png");
         ufo = Loader.imageLoader("res/ships/ufo.png");
         vidas = Loader.imageLoader("res/otros/vidas.png");
-        fuente = new Font("res/Fuentes/Kenney Future.ttf",Font.PLAIN,42);
-        fuentepeque = new Font("res/Fuentes/Kenney Future.ttf",Font.PLAIN,22);
+        botonGris = Loader.imageLoader("res/UI/grey_button00.png");
+        botonRojo = Loader.imageLoader("res/UI/red_button00.png");
+        fuente = new Font("res/Fuentes/kenvector_future.ttf",Font.PLAIN,42);
+        fuentepeque = new Font("res/Fuentes/kenvector_future.ttf",Font.PLAIN,22);
         for(int i = 0;i<grandes.length;i++){
             grandes[i] = Loader.imageLoader("res/asteroides/meteorGrey_big3.png");
         }
