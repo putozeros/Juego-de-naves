@@ -39,7 +39,6 @@ public class Player extends MovingObject{
             @Override
             public void actionPerformed(ActionEvent e) {
                 disminuirContador();
-                System.out.println(contador);
             }
         });
         temporizador.start();
@@ -63,16 +62,15 @@ public class Player extends MovingObject{
 
         if(shotAllowed){
             if(Keyboard.DISPARO && !fireRate.isRunning() && !spawning){
-                System.out.println("Contador: "+contador);
                 gameState.getMovingObjects().add(new Laser(getCenter().add(heading.escalar(ancho-30)), heading,
                         Constantes.LASER_SPEED, angle, Assets.lazul, gameState));
                 fireRate.run(Constantes.FIRERATE);
-                Sonido sonido = new Sonido("res/Sonidos/sfx_laser2.wav");
+                Sonido sonido = new Sonido("src/res/Sonidos/sfx_laser2.wav");
                 sonido.play();
                 actualizarContador();
 
                 if(contador >=11){
-                    Sonido overheat = new Sonido("res/Sonidos/sfx_overheat.wav");
+                    Sonido overheat = new Sonido("src/res/Sonidos/sfx_overheat.wav");
                     overheat.play();
                     shotAllowed=false;
                 }
@@ -125,36 +123,35 @@ public class Player extends MovingObject{
     }
 
     public BufferedImage getBarraLaser(){
-        int index = Math.max(0,Math.min(contador,Assets.getBarraLaser().length-1));
-        return Assets.getBarraLaser()[index];
-    }
+         int index = Math.max(0,Math.min(contador,Assets.getBarraLaser().length-1));
+         return Assets.getBarraLaser()[index];
+     }
 
-    public BufferedImage getSobrecargaImagen(){
-        if(contador ==0){
-            return Assets.getBarraLaser()[0];
-        }else if(contador ==1){
-            return Assets.getBarraLaser()[1];
-        }else if(contador ==2){
-            return Assets.getBarraLaser()[2];
-        }else if(contador ==3){
-            return Assets.getBarraLaser()[3];
-        }else if(contador ==4){
-            return Assets.getBarraLaser()[4];
-        }else if(contador ==5){
-            return Assets.getBarraLaser()[5];
-        }else if(contador ==6){
-            return Assets.getBarraLaser()[6];
-        }else if(contador ==7){
-            return Assets.getBarraLaser()[7];
-        }else if(contador ==8){
-            return Assets.getBarraLaser()[8];
-        }else if(contador ==9){
-            return Assets.getBarraLaser()[9];
-        }else{
-            return Assets.getBarraLaser()[10];
-        }
-    }
-
+     public BufferedImage getSobrecargaImagen(){
+         if(contador ==0){
+             return Assets.getBarraLaser()[0];
+         }else if(contador ==1){
+             return Assets.getBarraLaser()[1];
+         }else if(contador ==2){
+             return Assets.getBarraLaser()[2];
+         }else if(contador ==3){
+             return Assets.getBarraLaser()[3];
+         }else if(contador ==4){
+             return Assets.getBarraLaser()[4];
+         }else if(contador ==5){
+             return Assets.getBarraLaser()[5];
+         }else if(contador ==6){
+             return Assets.getBarraLaser()[6];
+         }else if(contador ==7){
+             return Assets.getBarraLaser()[7];
+         }else if(contador ==8){
+             return Assets.getBarraLaser()[8];
+         }else if(contador ==9){
+             return Assets.getBarraLaser()[9];
+         }else{
+             return Assets.getBarraLaser()[10];
+         }
+     }
     private void actualizarContador(){
         if(contador < 11){
             contador++;
@@ -170,7 +167,7 @@ public class Player extends MovingObject{
     public void Destruir(){
         spawning = true;
         spawntime.run(Constantes.Spawning);
-        Sonido sonido = new Sonido("res/Sonidos/sfx_lose.wav");
+        Sonido sonido = new Sonido("src/res/Sonidos/sfx_lose.wav");
         sonido.play();
         if(!gameState.substractLife()){
             gameState.gameOver();
@@ -218,5 +215,4 @@ public class Player extends MovingObject{
     public boolean isSpawning(){
         return spawning;
     }
-
 }

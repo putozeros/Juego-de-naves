@@ -75,7 +75,7 @@ public class ventana extends JFrame implements Runnable {
 
         Image fondo = null;
         try {
-            fondo = ImageIO.read(new File("res/Fondo/blue.png"));
+            fondo = ImageIO.read(new File("src/res/Fondo/blue.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

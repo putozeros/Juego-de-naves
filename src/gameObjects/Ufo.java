@@ -94,7 +94,7 @@ public class Ufo extends MovingObject{
             );
 
             gameState.getMovingObjects().add(0,laser);
-            Sonido sonido = new Sonido("res/Sonidos/sfx_laser1.wav");
+            Sonido sonido = new Sonido("src/res/Sonidos/sfx_laser1.wav");
             sonido.play();
             fireRate.run(Constantes.UFO_FIRERATE);
         }
@@ -107,7 +107,7 @@ public class Ufo extends MovingObject{
     @Override
     public void Destruir(){
         gameState.addpuntuacion(Constantes.UFO_SCORE, posicion);
-        Sonido sonido = new Sonido("res/Sonidos/explosion.wav");
+        Sonido sonido = new Sonido("src/res/Sonidos/explosion.wav");
         sonido.play();
         super.Destruir();
     }

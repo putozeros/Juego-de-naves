@@ -40,7 +40,7 @@ public class Asteroide extends MovingObject{
 
     @Override
     public void Destruir(){
-        Sonido sonido = new Sonido("res/Sonidos/explosion.wav");
+        Sonido sonido = new Sonido("src/res/Sonidos/explosion.wav");
         sonido.play();
         gameState.dividirAsteroide(this);
         gameState.addpuntuacion(Constantes.ASTEROIDE_SCORE, posicion);

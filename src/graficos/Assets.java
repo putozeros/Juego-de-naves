@@ -45,37 +45,37 @@ public class Assets {
     public static Font fuentepeque;
 
     public static void init(){
-        jugador = Loader.imageLoader("res/ships/player.png");
-        velocidad = Loader.imageLoader("res/effects/fire08.png");
-        lazul = Loader.imageLoader("res/lasers/laserBlue01.png");
-        lverde = Loader.imageLoader("res/lasers/laserGreen11.png");
-        lrojo = Loader.imageLoader("res/lasers/laserRed01.png");
-        ufo = Loader.imageLoader("res/ships/ufo.png");
-        vidas = Loader.imageLoader("res/otros/vidas.png");
-        botonGris = Loader.imageLoader("res/UI/grey_button00.png");
-        botonRojo = Loader.imageLoader("res/UI/red_button00.png");
-        fuente = new Font("res/Fuentes/kenvector_future.ttf",Font.PLAIN,42);
-        fuentepeque = new Font("res/Fuentes/kenvector_future.ttf",Font.PLAIN,22);
+        jugador = Loader.imageLoader("src/res/ships/player.png");
+        velocidad = Loader.imageLoader("src/res/effects/fire08.png");
+        lazul = Loader.imageLoader("src/res/lasers/laserBlue01.png");
+        lverde = Loader.imageLoader("src/res/lasers/laserGreen11.png");
+        lrojo = Loader.imageLoader("src/res/lasers/laserRed01.png");
+        ufo = Loader.imageLoader("src/res/ships/ufo.png");
+        vidas = Loader.imageLoader("src/res/otros/vidas.png");
+        botonGris = Loader.imageLoader("src/res/UI/grey_button00.png");
+        botonRojo = Loader.imageLoader("src/res/UI/red_button00.png");
+        fuente = new Font("src/res/Fuentes/kenvector_future.ttf",Font.PLAIN,42);
+        fuentepeque = new Font("src/res/Fuentes/kenvector_future.ttf",Font.PLAIN,22);
         for(int i = 0;i<barraLaser.length;i++){
-            barraLaser[i] = Loader.imageLoader("res/barraLaser/"+i+".png");
+            barraLaser[i] = Loader.imageLoader("src/res/barraLaser/"+i+".png");
         }
         for(int i = 0;i<grandes.length;i++){
-            grandes[i] = Loader.imageLoader("res/asteroides/meteorGrey_big3.png");
+            grandes[i] = Loader.imageLoader("src/res/asteroides/meteorGrey_big3.png");
         }
         for(int i = 0;i<medianos.length;i++){
-            medianos[i] = Loader.imageLoader("res/asteroides/meteorGrey_med1.png");
+            medianos[i] = Loader.imageLoader("src/res/asteroides/meteorGrey_med1.png");
         }
         for(int i = 0;i<peques.length;i++){
-            peques[i] = Loader.imageLoader("res/asteroides/meteorGrey_small1.png");
+            peques[i] = Loader.imageLoader("src/res/asteroides/meteorGrey_small1.png");
         }
         for(int i = 0;i<enanos.length;i++){
-            enanos[i] = Loader.imageLoader("res/asteroides/meteorGrey_tiny1.png");
+            enanos[i] = Loader.imageLoader("src/res/asteroides/meteorGrey_tiny1.png");
         }
         for(int i = 0;i < exp.length; i++){
-            exp[i] = Loader.imageLoader("res/Explosiones/"+i+".png");
+            exp[i] = Loader.imageLoader("src/res/Explosiones/"+i+".png");
         }
         for(int i = 0;i < num.length; i++) {
-            num[i] = Loader.imageLoader("res/numeros/"+ i +".png");
+            num[i] = Loader.imageLoader("src/res/numeros/"+ i +".png");
         }
     }
 

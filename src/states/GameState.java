@@ -34,7 +34,7 @@ public class GameState extends State{
         timerGameOver = new Crono();
         gameOver = false;
         movingObjects.add(player);
-        musica = new Sonido("res/Sonidos/musica.wav");
+        musica = new Sonido("src/res/Sonidos/musica.wav");
         musica.loop();
         asteroides = 1;
         iniciarOleada();
