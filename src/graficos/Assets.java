@@ -1,12 +1,10 @@
 package graficos;
 
-import java.io.File;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Assets {
+
     //botones
     public static BufferedImage botonGris;
     public static BufferedImage botonRojo;

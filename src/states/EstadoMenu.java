@@ -1,5 +1,6 @@
 package states;
 
+import UI.Accion;
 import UI.Buttones;
 import gameObjects.Constantes;
 import graficos.Assets;
@@ -17,17 +18,32 @@ public class EstadoMenu extends State{
                 Assets.botonGris,
                 Assets.botonRojo,
                 Constantes.WIDTH/2 - Assets.botonGris.getWidth()/2,
-                Constantes.HEIGHT/2 - Assets.botonGris.getHeight(),
+                Constantes.HEIGHT/2 - Assets.botonGris.getHeight()*2 ,
                 Constantes.PLAY,
-                () -> State.cambiarEstado(new GameState())));
+                () -> State.cambiarEstado(new GameState())
+        ));
 
         boton.add(new Buttones(
                 Assets.botonGris,
                 Assets.botonRojo,
                 Constantes.WIDTH/2 - Assets.botonGris.getWidth()/2,
-                Constantes.HEIGHT/2 + Assets.botonGris.getHeight(),
+                Constantes.HEIGHT/2 + Assets.botonGris.getHeight()*2,
                 Constantes.EXIT,
                 () -> System.exit(0)
+        ));
+
+        boton.add(new Buttones(
+                Assets.botonGris,
+                Assets.botonRojo,
+                Constantes.WIDTH / 2 - Assets.botonGris.getWidth() / 2,
+                Constantes.HEIGHT / 2,
+                "PUNTUACIONES",
+                new Accion() {
+                    @Override
+                    public void doAction() {
+                        State.cambiarEstado(new Score());
+                    }
+                }
         ));
     }
 

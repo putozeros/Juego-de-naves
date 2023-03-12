@@ -94,11 +94,16 @@ public class Player extends MovingObject{
 
     @Override
     public void Destruir(){
-        Sonido sonido = new Sonido("res/Sonidos/sfx_lose.wav");
-        sonido.play();
         spawning = true;
         spawntime.run(Constantes.Spawning);
+        Sonido sonido = new Sonido("res/Sonidos/sfx_lose.wav");
+        sonido.play();
+        if(!gameState.substractLife()){
+            gameState.gameOver();
+            super.Destruir();
+        }
         resetValues();
+
     }
 
     private void resetValues(){
@@ -106,7 +111,6 @@ public class Player extends MovingObject{
         speed = new Vector2D();
         posicion = new Vector2D(Constantes.WIDTH/2 - Assets.jugador.getWidth()/2,
                 Constantes.HEIGHT/2 - Assets.jugador.getHeight()/2);
-        gameState.substractLife();
     }
     @Override
     public void dibujar(Graphics graphics) {

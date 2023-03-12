@@ -13,20 +13,20 @@ public class Mensaje {
     private Vector2D posicion;
     private Color color;
     private boolean centro;
-    private boolean aparecer;
+    private boolean desaparecer;
     private Font font;
     private final float deltaAlfa = 0.01f;
 
-    public Mensaje(Vector2D posicion, boolean aparecer, String texto, Color color, boolean centro, Font font, GameState gameState) {
+    public Mensaje(Vector2D posicion, boolean desaparecer, String texto, Color color, boolean centro, Font font, GameState gameState) {
         this.gameState = gameState;
         this.texto = texto;
         this.posicion = posicion;
         this.color = color;
         this.centro = centro;
-        this.aparecer = aparecer;
+        this.desaparecer = desaparecer;
         this.font = font;
 
-        if(aparecer){
+        if(desaparecer){
             alpha =1;
         }else{
             alpha =0;
@@ -43,13 +43,13 @@ public class Mensaje {
 
         posicion.setY(posicion.getY()-1);
 
-        if(aparecer){
+        if(desaparecer){
             alpha -= deltaAlfa;
         }else{
             alpha += deltaAlfa;
         }
 
-        if(aparecer && alpha <0 || !aparecer && alpha > 1){
+        if(desaparecer && alpha <0 || !desaparecer && alpha > 1){
             gameState.getMensajes().remove(this);
         }
 

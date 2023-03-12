@@ -1,5 +1,7 @@
 package states;
 
+import IO.DatoPuntuacion;
+import IO.JSONParser;
 import gameObjects.*;
 import graficos.Animacion;
 import graficos.Assets;
@@ -8,26 +10,38 @@ import math.Vector2D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GameState extends State{
+    public static final Vector2D PLAYER_START_POSITION = new Vector2D(Constantes.WIDTH/2 - Assets.jugador.getWidth()/2,
+            Constantes.HEIGHT/2 - Assets.jugador.getHeight()/2);
 
     private Player player;
     private ArrayList<MovingObject> movingObjects = new ArrayList<MovingObject>();
     private ArrayList<Animacion> explosiones = new ArrayList<Animacion>();
     private ArrayList<Mensaje> mensajes = new ArrayList<Mensaje>();
-    private int puntuacion = 0,vidas = 3;
+    private int puntuacion = 0;
+    private int vidas = 3;
     private int asteroides;
-    private Font fuentecilla;
     private int waves = 1;
+    private boolean gameOver;
+    private Sonido musica;
+    private Crono timerGameOver,ufoSpawner;
     public GameState(){
-        player=new Player(new Vector2D(640,360), new Vector2D(),6 , Assets.jugador,this);
+        player=new Player(PLAYER_START_POSITION, new Vector2D(),6 , Assets.jugador,this);
+        timerGameOver = new Crono();
+        gameOver = false;
         movingObjects.add(player);
-        Sonido musica= new Sonido("res/Sonidos/musica.wav");
+        musica = new Sonido("res/Sonidos/musica.wav");
         musica.loop();
         asteroides = 1;
         iniciarOleada();
+        ufoSpawner = new Crono();
+        ufoSpawner.run(Constantes.UFO_SPAWN_RATE);
     }
+
 
     public void addpuntuacion (int value, Vector2D posicion){
         puntuacion += value;
@@ -143,12 +157,33 @@ public class GameState extends State{
                 explosiones.remove(i);
             }
         }
+        if(gameOver && !timerGameOver.isRunning()){
+
+            try {
+                ArrayList<DatoPuntuacion> datalist = JSONParser.leerArchivo();
+                datalist.add(new DatoPuntuacion(puntuacion));
+                JSONParser.escribirArchivo(datalist);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            State.cambiarEstado(new EstadoMenu());
+        }
+        if(!ufoSpawner.isRunning()){
+            ufoSpawner.run(Constantes.UFO_SPAWN_RATE);
+            spawnUfo();
+        }
+
+        timerGameOver.actualizar();
+        ufoSpawner.actualizar();
 
         for(int i = 0;i<movingObjects.size();i++){
             if(movingObjects.get(i) instanceof Asteroide){
                 return;
             }
         }
+
         iniciarOleada();
     }
 
@@ -184,7 +219,10 @@ public class GameState extends State{
         }
     }
 
-    private void dibujarVidas(Graphics graphics){
+    public void dibujarVidas(Graphics graphics){
+        if(vidas < 1){
+            return;
+        }
         Vector2D posicionVidas = new Vector2D(25,25);
         graphics.drawImage(Assets.vidas,(int)posicionVidas.getX(),(int)posicionVidas.getY(),null);
         graphics.drawImage(Assets.num[10],(int)posicionVidas.getX() +45,(int)posicionVidas.getY() +8, null);
@@ -195,7 +233,7 @@ public class GameState extends State{
 
         for (int i = 0; i <vidasAString.length();i++){
             int numero = Integer.parseInt(vidasAString.substring(i,i+1));
-            if (numero <0){
+            if (numero <=0){
                 break;
             }
             graphics.drawImage(Assets.num[numero],(int)posicion.getX() +65,(int)posicion.getY()+8,null);
@@ -214,7 +252,16 @@ public class GameState extends State{
         return mensajes;
     }
 
-    public void substractLife() {
+    public boolean substractLife() {
         vidas--;
+        return vidas > 0;
+    }
+
+    public void gameOver(){
+        Mensaje perdedor = new Mensaje(PLAYER_START_POSITION,true,"GAME OVER",Color.WHITE,true,Assets.fuente,this);
+        this.mensajes.add(perdedor);
+        musica.stop();
+        timerGameOver.run(Constantes.GAME_OVER_TIME);
+        gameOver = true;
     }
 }

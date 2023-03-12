@@ -25,7 +25,6 @@ public abstract class MovingObject extends GameObject{
         ancho = texture.getWidth();
         alto = texture.getHeight();
         angle = 0;
-
     }
 
     protected void collidesWith(){
@@ -72,5 +71,6 @@ public abstract class MovingObject extends GameObject{
     protected Vector2D getCenter(){
         return new Vector2D(posicion.getX() + ancho/2,posicion.getY() + alto/2);
     }
+
 
 }

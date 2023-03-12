@@ -40,7 +40,6 @@ public class Sonido {
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
-
     public void cambiarVolumen (float value){
         volumen.setValue(value);
     }
