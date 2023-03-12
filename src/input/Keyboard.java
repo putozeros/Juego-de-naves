@@ -5,7 +5,10 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
     private boolean[] keys = new boolean[256];
-    public static boolean ARRIBA,IZQUIERDA,DERECHA,DISPARO;
+    public static boolean ARRIBA;
+    public static boolean IZQUIERDA;
+    public static boolean DERECHA;
+    public static boolean DISPARO;
     public Keyboard(){
         ARRIBA=false;
         IZQUIERDA=false;

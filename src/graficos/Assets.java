@@ -31,6 +31,9 @@ public class Assets {
 
     public static BufferedImage[] exp = new BufferedImage[9];
 
+    //barralaser
+    public static BufferedImage[] barraLaser = new BufferedImage[12];
+
     // Asteroides
 
     public static BufferedImage[] grandes = new BufferedImage[4];
@@ -53,6 +56,9 @@ public class Assets {
         botonRojo = Loader.imageLoader("res/UI/red_button00.png");
         fuente = new Font("res/Fuentes/kenvector_future.ttf",Font.PLAIN,42);
         fuentepeque = new Font("res/Fuentes/kenvector_future.ttf",Font.PLAIN,22);
+        for(int i = 0;i<barraLaser.length;i++){
+            barraLaser[i] = Loader.imageLoader("res/barraLaser/"+i+".png");
+        }
         for(int i = 0;i<grandes.length;i++){
             grandes[i] = Loader.imageLoader("res/asteroides/meteorGrey_big3.png");
         }
@@ -71,5 +77,9 @@ public class Assets {
         for(int i = 0;i < num.length; i++) {
             num[i] = Loader.imageLoader("res/numeros/"+ i +".png");
         }
+    }
+
+    public static BufferedImage[] getBarraLaser() {
+        return barraLaser;
     }
 }

@@ -6,7 +6,10 @@ import input.Keyboard;
 import math.Vector2D;
 import states.GameState;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -18,6 +21,12 @@ public class Player extends MovingObject{
     private Crono fireRate;
     private boolean spawning=true, visible;
     private Crono spawntime,flickering;
+    private int contador = 0;
+    private boolean shotAllowed;
+    private Timer temporizador;
+    private BufferedImage barraActual;
+    private int barraLaserIndex;
+
     public Player(Vector2D posicion, Vector2D speed,double maxSpeed, BufferedImage texture, GameState gameState) {
         super(posicion, speed, maxSpeed, texture, gameState);
         heading = new Vector2D(0,1);
@@ -26,6 +35,16 @@ public class Player extends MovingObject{
         fireRate = new Crono();
         spawntime = new Crono();
         flickering = new Crono();
+        temporizador = new Timer(250, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                disminuirContador();
+                System.out.println(contador);
+            }
+        });
+        temporizador.start();
+        shotAllowed = true;
+        barraLaserIndex = 0;
     }
 
     @Override
@@ -42,12 +61,25 @@ public class Player extends MovingObject{
             }
         }
 
-        if(Keyboard.DISPARO && !fireRate.isRunning() && !spawning){
-            gameState.getMovingObjects().add(new Laser(getCenter().add(heading.escalar(ancho-30)), heading,
-                    Constantes.LASER_SPEED, angle, Assets.lazul, gameState));
-            fireRate.run(Constantes.FIRERATE);
-            Sonido sonido = new Sonido("res/Sonidos/sfx_laser2.wav");
-            sonido.play();
+        if(shotAllowed){
+            if(Keyboard.DISPARO && !fireRate.isRunning() && !spawning){
+                System.out.println("Contador: "+contador);
+                gameState.getMovingObjects().add(new Laser(getCenter().add(heading.escalar(ancho-30)), heading,
+                        Constantes.LASER_SPEED, angle, Assets.lazul, gameState));
+                fireRate.run(Constantes.FIRERATE);
+                Sonido sonido = new Sonido("res/Sonidos/sfx_laser2.wav");
+                sonido.play();
+                actualizarContador();
+
+                if(contador >=11){
+                    Sonido overheat = new Sonido("res/Sonidos/sfx_overheat.wav");
+                    overheat.play();
+                    shotAllowed=false;
+                }
+            }
+        }
+        if (contador ==0){
+            shotAllowed=true;
         }
         if(Keyboard.DERECHA){
             angle += Constantes.DELTAANGLE;
@@ -90,6 +122,48 @@ public class Player extends MovingObject{
         flickering.actualizar();
         collidesWith();
 
+    }
+
+    public BufferedImage getBarraLaser(){
+        int index = Math.max(0,Math.min(contador,Assets.getBarraLaser().length-1));
+        return Assets.getBarraLaser()[index];
+    }
+
+    public BufferedImage getSobrecargaImagen(){
+        if(contador ==0){
+            return Assets.getBarraLaser()[0];
+        }else if(contador ==1){
+            return Assets.getBarraLaser()[1];
+        }else if(contador ==2){
+            return Assets.getBarraLaser()[2];
+        }else if(contador ==3){
+            return Assets.getBarraLaser()[3];
+        }else if(contador ==4){
+            return Assets.getBarraLaser()[4];
+        }else if(contador ==5){
+            return Assets.getBarraLaser()[5];
+        }else if(contador ==6){
+            return Assets.getBarraLaser()[6];
+        }else if(contador ==7){
+            return Assets.getBarraLaser()[7];
+        }else if(contador ==8){
+            return Assets.getBarraLaser()[8];
+        }else if(contador ==9){
+            return Assets.getBarraLaser()[9];
+        }else{
+            return Assets.getBarraLaser()[10];
+        }
+    }
+
+    private void actualizarContador(){
+        if(contador < 11){
+            contador++;
+        }
+    }
+    private void disminuirContador(){
+        if(contador > 0){
+            contador --;
+        }
     }
 
     @Override
@@ -137,6 +211,8 @@ public class Player extends MovingObject{
         at.rotate(angle, ancho/2, alto/2);
 
         g2d.drawImage(texture, at, null);
+        BufferedImage barra = Assets.getBarraLaser()[contador];
+        graphics.drawImage(barra,1150,550,null);
     }
 
     public boolean isSpawning(){

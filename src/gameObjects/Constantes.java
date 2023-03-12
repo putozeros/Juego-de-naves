@@ -10,7 +10,7 @@ public class Constantes {
     public static final int HEIGHT = 720;
 
     //propiedades del jugador
-    public static final int FIRERATE = 200;
+    public static final int FIRERATE = 100;
     public static final double DELTAANGLE = 0.1;
     public static final double ACC = 0.2;
     public static final long Flicker = 200;

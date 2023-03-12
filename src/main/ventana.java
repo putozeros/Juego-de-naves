@@ -8,9 +8,12 @@ import states.EstadoMenu;
 import states.GameState;
 import states.State;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.io.IOException;
 
 public class ventana extends JFrame implements Runnable {
 
@@ -69,15 +72,23 @@ public class ventana extends JFrame implements Runnable {
 
         graphics = buffer.getDrawGraphics();
         //----------------------------------
-        graphics.setColor(Color.black);
-        graphics.fillRect(0,0,Constantes.WIDTH, Constantes.HEIGHT);
+
+        Image fondo = null;
+        try {
+            fondo = ImageIO.read(new File("res/Fondo/blue.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int anchoImagen = fondo.getWidth(null);
+        int altoImagen = fondo.getHeight(null);
+        for (int x = 0; x<Constantes.WIDTH;x+= anchoImagen){
+            for(int y = 0; y<Constantes.HEIGHT;y+= altoImagen){
+                graphics.drawImage(fondo,x,y,null);
+            }
+        }
 
         State.getEstadoActual().dibujar(graphics);
-
-        /*graphics.setColor(Color.WHITE);
-
-        graphics.drawString(""+AVGFPS,5,15);*/
-
         //----------------------------------
         graphics.dispose();
         buffer.show();
