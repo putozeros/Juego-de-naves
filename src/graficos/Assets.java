@@ -32,7 +32,7 @@ public class Assets {
     public static BufferedImage[] exp = new BufferedImage[9];
 
     //barralaser
-    public static BufferedImage[] barraLaser = new BufferedImage[12];
+    public static BufferedImage[] barraLaser = new BufferedImage[11];
 
     // Asteroides
 

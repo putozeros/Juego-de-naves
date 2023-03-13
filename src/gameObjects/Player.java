@@ -69,7 +69,7 @@ public class Player extends MovingObject{
                 sonido.play();
                 actualizarContador();
 
-                if(contador >=11){
+                if(contador >=10){
                     Sonido overheat = new Sonido("src/res/Sonidos/sfx_overheat.wav");
                     overheat.play();
                     shotAllowed=false;
@@ -153,7 +153,7 @@ public class Player extends MovingObject{
          }
      }
     private void actualizarContador(){
-        if(contador < 11){
+        if(contador < 10){
             contador++;
         }
     }
